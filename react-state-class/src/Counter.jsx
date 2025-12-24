@@ -6,8 +6,9 @@ export default function Counter(){
 
    
     function incCount(){
-        setCount(count + 1);
-        console.log(count);
+       // setCount(count + 1);  this is async 
+       setCount((count)=>{return count+1}); // Thius is  sync way 
+  
     }
     return(
         <div>
