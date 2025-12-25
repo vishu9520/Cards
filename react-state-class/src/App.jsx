@@ -2,13 +2,16 @@ import './App.css'
 import Counter from './Counter.jsx'
 import LikeButton from './LikeButton.jsx'
 import Ludo from './LudoBoard.jsx'
+import TodoList from './TodoList.jsx'
 function App() {
  return( <>
-  <h1>states in react
+  <h1>
     
     {/* <LikeButton/> 
     <Counter/> */}
-    <Ludo/>
+    {/* <Ludo/> */}
+    <TodoList/>
+
   </h1>
  
     </>
