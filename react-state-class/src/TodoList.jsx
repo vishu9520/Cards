@@ -18,6 +18,26 @@ export default function TodoList(){
         console.log("id to delete",id);
        setTodo((prevTodos)=>prevTodos.filter((prevTodos)=>prevTodos.id!=id));
     }
+   let upperCaseAll =()=>{
+    setTodo((prevTodos)=> prevTodos.map((todo)=>{
+        return {task: todo.task.toUpperCase(), id: todo.id};
+    }));
+   };
+  let upperCaseOne =(id)=>{
+    setTodo((prevTasks)=>
+    prevTasks.map((todo)=>{
+        if(todo.id===id){
+            return{
+                ...todo,
+                task:todo.task.toUpperCase(),
+            };
+        }
+        else{
+            return todo;
+        }
+    }))
+  };
+    
     return(
         
         <div>
@@ -37,8 +57,11 @@ export default function TodoList(){
                   <span>{todo.task}</span>  
                   &nbsp; &nbsp; &nbsp; 
                   <button onClick={()=>deleteTodo(todo.id)}>delete</button>
+                  &nbsp; 
+                  <button onClick={()=>upperCaseOne(todo.id)}>UpperCase</button>
                     </li>
                 ))}
                 </ul>
+                <button onClick={upperCaseAll}>UpperCase All</button>
         </div>
     );}
