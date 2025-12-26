@@ -1,7 +1,7 @@
 import {v4 as uuid4} from "uuid";
 import { useState } from "react";
 export default function TodoList(){
-    let [todoList,setTodo]=useState([{task:"sample-task",id:uuid4()}]);
+    let [todoList,setTodo]=useState([{task:"sample-task",id:uuid4(),isDone:false}]);
     let [newTodo,setNewTodo]= useState("");
     
     let updateTodoValue =(event)=>{
@@ -10,7 +10,7 @@ export default function TodoList(){
     let addNewTask =()=>{
 
         setTodo((prevTodos)=>{
-            return [...prevTodos,{task:newTodo,id:uuid4()}];
+            return [...prevTodos,{task:newTodo,id:uuid4(),isDone:false}];
         });
         setNewTodo("");
     }
@@ -18,18 +18,18 @@ export default function TodoList(){
         console.log("id to delete",id);
        setTodo((prevTodos)=>prevTodos.filter((prevTodos)=>prevTodos.id!=id));
     }
-   let upperCaseAll =()=>{
+   let marksAllDone =()=>{
     setTodo((prevTodos)=> prevTodos.map((todo)=>{
-        return {task: todo.task.toUpperCase(), id: todo.id};
+        return {...todo,isDone:true,};
     }));
    };
-  let upperCaseOne =(id)=>{
+  let marksAsDone =(id)=>{
     setTodo((prevTasks)=>
     prevTasks.map((todo)=>{
         if(todo.id===id){
             return{
                 ...todo,
-                task:todo.task.toUpperCase(),
+                isDone:true,
             };
         }
         else{
@@ -54,14 +54,14 @@ export default function TodoList(){
             <h4>Tasks  Todo</h4>
             <ul>{todoList.map((todo)=>(
                 <li key={todo.id}>
-                  <span>{todo.task}</span>  
+                  <span style={todo.isDone?{textDecorationLine:"line-through"}:{}}>{todo.task}</span>  
                   &nbsp; &nbsp; &nbsp; 
                   <button onClick={()=>deleteTodo(todo.id)}>delete</button>
                   &nbsp; 
-                  <button onClick={()=>upperCaseOne(todo.id)}>UpperCase</button>
+                  <button onClick={()=>marksAsDone(todo.id)}>Marks as Done</button>
                     </li>
                 ))}
                 </ul>
-                <button onClick={upperCaseAll}>UpperCase All</button>
+                <button onClick={marksAllDone}>Marks All as Done</button>
         </div>
     );}
